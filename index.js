@@ -6,6 +6,17 @@ var fs = require('fs');
 var _ = require('lodash');
 var crypto = require('crypto');
 var shasum = crypto.createHash('sha1');
+var express = require('express');
+var app = express();
+
+// To make heroku happy...
+app.set('port', (process.env.PORT || 5000));
+app.get('/', function(request, response) {
+  response.end('good morning');
+});
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 
 if (!process.env.FIREBASE_URL) {
