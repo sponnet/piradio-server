@@ -102,7 +102,7 @@ aref.authWithPassword({
 
 			// update the timestamp
 			if (_.includes(filteredchannels, channelid.toString())) {
-				console.log("Channel " + item.channel.id + " is filtered.");
+				console.log("Channel " + channelid + " is filtered.");
 			} else {
 				var url = firebaseURL + "/radioplus/channels/" + channelid;
 				var ref = new Firebase(url);
