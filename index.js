@@ -9,6 +9,9 @@ var shasum = crypto.createHash('sha1');
 var express = require('express');
 var app = express();
 
+// config settings
+var filteredchannels = ["21", "22", "23", "24", "13"];
+
 // To make heroku happy...
 app.set('port', (process.env.PORT || 5000));
 app.get('/', function(request, response) {
@@ -51,7 +54,6 @@ aref.authWithPassword({
 		client.on('currentState', function(data) {
 			console.log('currentState');
 
-			var filteredchannels = ["21", "22", "23", "24", "13"];
 
 			// get channel data
 			_.map(data, function(item) {
@@ -99,12 +101,15 @@ aref.authWithPassword({
 			});
 
 			// update the timestamp
-			var url = firebaseURL + "/radioplus/channels/" + channelid;
-			var ref = new Firebase(url);
-			ref.update({
-				lastupdate: Math.floor(new Date().getTime() / 1000)
-			});
-
+			if (_.includes(filteredchannels, channelid.toString())) {
+				console.log("Channel " + item.channel.id + " is filtered.");
+			} else {
+				var url = firebaseURL + "/radioplus/channels/" + channelid;
+				var ref = new Firebase(url);
+				ref.update({
+					lastupdate: Math.floor(new Date().getTime() / 1000)
+				});
+			}
 
 		});
 
