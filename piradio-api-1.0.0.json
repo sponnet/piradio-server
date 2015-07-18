@@ -1,0 +1,221 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the piradio api for plugins\n",
+        "version": "1.0.0",
+        "title": "Piradio",
+        "termsOfService": "http://ww.piradio.com/terms/",
+        "contact": {
+            "name": "stefaan@ponnet.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "api.piradio.com",
+    "basePath": "/v1",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/channels": {
+            "post": {
+                "tags": [
+                    "channel"
+                ],
+                "summary": "Add a new channel to the store",
+                "description": "",
+                "operationId": "addChannel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Channel object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Channel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "piradio_auth": [
+                            "write_channels",
+                            "read_channels"
+                        ]
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "channel"
+                ],
+                "summary": "Update an existing channel",
+                "description": "",
+                "operationId": "updateChannel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Channel object that needs to be added to the store",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Channel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Channel not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                },
+                "security": [
+                    {
+                        "piradio_auth": [
+                            "write_channels",
+                            "read_channels"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/channels/{channelId}": {
+            "delete": {
+                "tags": [
+                    "channel"
+                ],
+                "summary": "Deletes a channel",
+                "description": "",
+                "operationId": "deleteChannel",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "api_key",
+                        "description": "",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "channelId",
+                        "description": "Channel id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid channel value"
+                    }
+                },
+                "security": [
+                    {
+                        "piradio_auth": [
+                            "write_channels",
+                            "read_channels"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        },
+        "piradio_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "http://api.piradio.com/api/oauth/dialog",
+            "flow": "implicit",
+            "scopes": {
+                "write_channels": "modify channels in your account",
+                "read_channels": "read your channels"
+            }
+        }
+    },
+    "definitions": {
+        "Channel": {
+            "required": [
+                "id",
+                "name",
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "external ID of this channel"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Display name of this channel"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Display longer description of this channel"
+                }
+            }
+        },
+        "Song": {
+            "required": [
+                "id",
+                "artist",
+                "title",
+                "unixtimestamp"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "external ID of this song"
+                },
+                "artist": {
+                    "type": "string",
+                    "description": "Artist of this song"
+                },
+                "composer": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Display name of this song"
+                },
+                "unixtimestamp": {
+                    "type": "string",
+                    "description": "When was this song played ( unix time )"
+                },
+                "videoid": {
+                    "type": "string",
+                    "description": "Youtube ID of this song"
+                }
+            }
+        }
+    }
+}

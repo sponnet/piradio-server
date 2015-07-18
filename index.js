@@ -9,6 +9,25 @@ var shasum = crypto.createHash('sha1');
 var express = require('express');
 var app = express();
 
+
+var initializeSwagger = require('swagger-tools').initializeMiddleware;
+
+// This assumes you're in the root of the swagger-tools
+var swaggerObject = require('./piradio-api-1.0.0.json');
+
+// Configure non-Swagger related middleware and server components prior to Swagger middleware
+initializeSwagger(swaggerObject, function (middleware) {
+
+ // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+  app.use(middleware.swaggerMetadata());
+ app.use(middleware.swaggerUi());
+  // Initialize the Swagger middleware (Examples below)
+  // Initialize the remaining server components
+  // Start server
+});
+
+
+
 // config settings
 var filteredchannels = ["21", "22", "23", "24", "13"];
 

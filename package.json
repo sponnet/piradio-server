@@ -16,6 +16,7 @@
     "request": "^2.58.0",
     "socket.io-client": "0.9.17",
     "spotify-web-api-node": "^2.0.2",
+    "swagger-tools": "^0.9.0",
     "util": "^0.10.3",
     "youtube-node": "^1.2.0"
   },
