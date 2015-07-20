@@ -73,6 +73,16 @@ module.exports = {
 			}, 2000);
 		};
 
+
+		var checkInterval = setInterval(function() {
+			if (sock.readyState != 1) {
+				console.log('socket is dead. Reconnect please...');
+				connectSocket();
+			} else {
+				//				console.log('socket is alive.');
+			}
+		}, 20000);
+
 	},
 
 	status: function status() {
