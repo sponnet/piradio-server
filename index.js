@@ -37,7 +37,7 @@ app.get('/status', function(request, response) {
 	var ref = new Firebase(firebaseURL + "/radioplus/channels");
 	// Attach an asynchronous callback to read the data at our posts reference
 	ref.once("value", function(snapshot, cb) {
-
+		var globalok = true;
 		var channelinfo = _.reduce(snapshot.val(), function(result, n, key) {
 			var r = {
 				name: n.name,
@@ -48,12 +48,16 @@ app.get('/status', function(request, response) {
 				r.lastupdate_age_in_min = Math.floor(age_in_min);
 				r.lastupdate_sanity = (age_in_min > 15) ? false : true;
 			}
+			if (r.lastupdate_sanity === false) {
+				globalok = false;
+			}
+
 			result.push(r);
 
 			return result;
 		}, []);
 
-		response.status(500).json({
+		response.status(globalok ? 200 : 503).json({
 			plugins: [
 				plugins_vrt.status(),
 				plugins_joefm.status()
@@ -89,8 +93,8 @@ aref.authWithPassword({
 		console.log("Authenticated successfully with payload:", authData);
 
 
-				plugins_joefm.startFetcher(firebaseURL);
-				plugins_vrt.startFetcher(firebaseURL);
+		plugins_joefm.startFetcher(firebaseURL);
+		plugins_vrt.startFetcher(firebaseURL);
 
 	}
 });

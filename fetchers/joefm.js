@@ -4,6 +4,7 @@ var SockJS = require('sockjs-client');
 
 var firebaseURL;
 var sock;
+var recInterval = null;
 
 module.exports = {
 
@@ -15,9 +16,15 @@ module.exports = {
 		});
 
 
-		sock = new SockJS('http://socket.api.joe.be/api');
+		function connectSocket() {
+			sock = new SockJS('http://socket.api.joe.be/api');
+			clearInterval(recInterval);
+		}
+
+		connectSocket();
+
 		sock.onopen = function() {
-			console.log('open');
+			console.log('socket opened');
 			// ff abbonneren op de liekeslijst aub
 			sock.send("{\"action\":\"join\",\"id\":1,\"sub\":{\"station\":\"joe_fm\",\"entity\":\"plays\",\"action\":\"play\"},\"backlog\":50}");
 			var postdata = {
@@ -31,7 +38,6 @@ module.exports = {
 		};
 
 		sock.onmessage = function(e) {
-			//			console.log('message', e.data);
 			var d = JSON.parse(e.data);
 			d = JSON.parse(d.data);
 			console.log('--------');
@@ -60,7 +66,11 @@ module.exports = {
 		};
 
 		sock.onclose = function() {
-			console.log('close');
+			console.log('socket disconnected. Attempt to reconnect');
+			socket = null;
+			recInterval = setInterval(function() {
+				connectSocket();
+			}, 2000);
 		};
 
 	},
