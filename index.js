@@ -36,7 +36,7 @@ app.get('/status', function(request, response) {
 
 	var ref = new Firebase(firebaseURL + "/radioplus/channels");
 	// Attach an asynchronous callback to read the data at our posts reference
-	ref.on("value", function(snapshot, cb) {
+	ref.once("value", function(snapshot, cb) {
 
 		var channelinfo = _.reduce(snapshot.val(), function(result, n, key) {
 			var r = {
