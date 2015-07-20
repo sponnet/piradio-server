@@ -46,7 +46,7 @@ app.get('/status', function(request, response) {
 			var age_in_min = moment.duration(1000 * (Math.floor(new Date().getTime() / 1000) - n.lastupdate)).asMinutes();
 			if (n.lastupdate) {
 				r.lastupdate_age_in_min = Math.floor(age_in_min);
-				r.lastupdate_sanity = (age_in_min > 15) ? false : true;
+				r.lastupdate_sanity = (age_in_min > 90) ? false : true;
 			}
 			if (r.lastupdate_sanity === false) {
 				globalok = false;
