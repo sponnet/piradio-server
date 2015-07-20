@@ -62,7 +62,8 @@ app.get('/status', function(request, response) {
 				plugins_vrt.status(),
 				plugins_joefm.status()
 			],
-			channels: channelinfo
+			channels: channelinfo,
+			globalstatus: globalok ? "globalstatus_ok" : "globalstatus_error"
 		});
 		response.end();
 	});
