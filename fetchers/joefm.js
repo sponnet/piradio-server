@@ -3,6 +3,7 @@ var playlistdata = require('../services/playlistdata');
 var SockJS = require('sockjs-client');
 
 var firebaseURL;
+var sock;
 
 module.exports = {
 
@@ -14,7 +15,7 @@ module.exports = {
 		});
 
 
-		var sock = new SockJS('http://socket.api.joe.be/api');
+		sock = new SockJS('http://socket.api.joe.be/api');
 		sock.onopen = function() {
 			console.log('open');
 			// ff abbonneren op de liekeslijst aub
@@ -67,7 +68,8 @@ module.exports = {
 	status: function status() {
 		return ({
 			name: "JoeFM",
-
+			socketopen: sock.readyState == 1 ? true : false,
+			sockstatus: sock.readyState
 		});
 	}
 

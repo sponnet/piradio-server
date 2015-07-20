@@ -3,6 +3,7 @@ var playlistdata = require('../services/playlistdata');
 var _ = require('lodash');
 
 var firebaseURL;
+var client;
 
 module.exports = {
 
@@ -19,7 +20,7 @@ module.exports = {
 		// and a news only channel ( no music there )
 		var filteredchannels = ["21", "22", "23", "24", "13"];
 
-		var client = socket.connect('http://radioplusnode.vrt.be');
+		client = socket.connect('http://radioplusnode.vrt.be');
 
 		client.on('connecting', function(transport_type) {
 			console.log('connecting ' + transport_type);
@@ -158,6 +159,7 @@ module.exports = {
 	status: function status() {
 		return ({
 			name: "VRT",
+			socketopen: client.socket.open ? true : false,
 		});
 	}
 };
