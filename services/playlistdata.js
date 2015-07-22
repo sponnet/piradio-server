@@ -8,9 +8,6 @@ var firebaseURL;
 module.exports = {
 
 	init: function(config) {
-
-		console.log('init playlistdataservice ', config);
-
 		firebaseURL = config.firebaseURL;
 	},
 
