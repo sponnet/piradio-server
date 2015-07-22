@@ -9,6 +9,7 @@ var moment = require('moment');
 // load the plugins
 var plugins_joefm = require('./fetchers/joefm');
 var plugins_vrt = require('./fetchers/vrt');
+var plugins_538 = require('./fetchers/538');
 
 
 // Swagger stuff
@@ -93,9 +94,11 @@ aref.authWithPassword({
 	} else {
 		console.log("Authenticated successfully with payload:", authData);
 
+				plugins_joefm.startFetcher(firebaseURL);
+				plugins_vrt.startFetcher(firebaseURL);
+				plugins_538.startFetcher(firebaseURL);
 
-		plugins_joefm.startFetcher(firebaseURL);
-		plugins_vrt.startFetcher(firebaseURL);
+
 
 	}
 });
