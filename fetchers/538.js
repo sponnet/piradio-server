@@ -4,7 +4,7 @@ var request = require("request")
 var firebaseURL;
 var _ = require('lodash');
 
-var includedChannels = ['538', 'nonstop40'];
+var includedChannels = ['538'];
 
 module.exports = {
 
