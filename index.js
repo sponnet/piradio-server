@@ -11,6 +11,7 @@ var plugins = {
 	plugins_joefm: require('./fetchers/joefm'),
 	plugins_vrt: require('./fetchers/vrt'),
 	plugins_538: require('./fetchers/538'),
+	plugins_nostalgie: require('./fetchers/nostalgie'),
 };
 
 
@@ -100,12 +101,12 @@ aref.authWithPassword({
 	} else {
 		console.log("Authenticated successfully with payload:", authData);
 
-		
-				_.map(plugins, function(plugin,key) {
-					console.log("Starting fetcher " + key);
-					plugin.startFetcher(firebaseURL);
-				});
-		
+
+		_.map(plugins, function(plugin, key) {
+			console.log("Starting fetcher " + key);
+			plugin.startFetcher(firebaseURL);
+		});
+
 
 
 	}
