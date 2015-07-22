@@ -29,6 +29,7 @@ module.exports = {
 
 			downloadJSON(function(err, data) {
 				console.log("Got data:", data);
+
 				var unixtimestamp = moment().hour(parseInt(data.tijd0.split('u')[0])).minutes(parseInt(data.tijd0.split('u')[1]));
 				var songdata = {
 					channelid: 'nostalgie',
@@ -39,6 +40,29 @@ module.exports = {
 				};
 				console.log('song to be saved : ', songdata);
 				playlistdata.postSong(songdata);
+
+				unixtimestamp = moment().hour(parseInt(data.tijd1.split('u')[0])).minutes(parseInt(data.tijd1.split('u')[1]));
+				songdata = {
+					channelid: 'nostalgie',
+					artist: data.artiest1,
+					title: data.titel1,
+					timestamp: unixtimestamp.toISOString(),
+					unixtimestamp: unixtimestamp.unix(),
+				};
+				console.log('song to be saved : ', songdata);
+				playlistdata.postSong(songdata);
+
+				unixtimestamp = moment().hour(parseInt(data.tijd2.split('u')[0])).minutes(parseInt(data.tijd2.split('u')[1]));
+				songdata = {
+					channelid: 'nostalgie',
+					artist: data.artiest2,
+					title: data.titel2,
+					timestamp: unixtimestamp.toISOString(),
+					unixtimestamp: unixtimestamp.unix(),
+				};
+				console.log('song to be saved : ', songdata);
+				playlistdata.postSong(songdata);
+
 			});
 		}
 
