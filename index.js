@@ -7,9 +7,12 @@ var _ = require('lodash');
 var moment = require('moment');
 
 // load the plugins
-var plugins_joefm = require('./fetchers/joefm');
-var plugins_vrt = require('./fetchers/vrt');
-var plugins_538 = require('./fetchers/538');
+var plugins = {
+	plugins_joefm: require('./fetchers/joefm'),
+	plugins_vrt: require('./fetchers/vrt'),
+	plugins_538: require('./fetchers/538'),
+};
+
 
 
 // Swagger stuff
@@ -58,11 +61,14 @@ app.get('/status', function(request, response) {
 			return result;
 		}, []);
 
+		var status = _.reduce(plugins, function(acc, plugin) {
+			acc.push(plugin.status());
+			return acc;
+		}, []);
+
+
 		response.status(globalok ? 200 : 503).json({
-			plugins: [
-				plugins_vrt.status(),
-				plugins_joefm.status()
-			],
+			plugins: status,
 			channels: channelinfo,
 			globalstatus: globalok ? "globalstatus_ok" : "globalstatus_error"
 		});
@@ -94,10 +100,12 @@ aref.authWithPassword({
 	} else {
 		console.log("Authenticated successfully with payload:", authData);
 
-				plugins_joefm.startFetcher(firebaseURL);
-				plugins_vrt.startFetcher(firebaseURL);
-				plugins_538.startFetcher(firebaseURL);
-
+		
+				_.map(plugins, function(plugin,key) {
+					console.log("Starting fetcher " + key);
+					plugin.startFetcher(firebaseURL);
+				});
+		
 
 
 	}
