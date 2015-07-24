@@ -17,7 +17,7 @@ module.exports = {
 		console.log("Found a channel " + ref);
 
 		var channel = new Firebase(ref);
-		channel.set(channeldata, function(error) {
+		channel.update(channeldata, function(error) {
 			if (error) {
 				console.log("Data could not be saved." + error);
 			} else {
