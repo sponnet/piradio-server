@@ -30,7 +30,7 @@ module.exports = {
 						description: 'Q Music',
 						name: 'Q Music',
 						website: 'http://q-music.be',
-						icon: 'http://static1.q-music.vmmacdn.be//6/7a/ec/a9/1010063/dekstop_logo_1.png'
+						icon: 'http://a3.mzstatic.com/eu/r30/Purple7/v4/6d/0a/5a/6d0a5aef-958d-248b-45ce-edf460be6661/icon175x175.png'
 					}
 					playlistdata.postChannel(postdata);
 			};
