@@ -12,6 +12,7 @@ var plugins = {
 	plugins_vrt: require('./fetchers/vrt'),
 	plugins_538: require('./fetchers/538'),
 	plugins_nostalgie: require('./fetchers/nostalgie'),
+	plugins_qmusic: require('./fetchers/q-music'),
 };
 
 
@@ -101,13 +102,10 @@ aref.authWithPassword({
 	} else {
 		console.log("Authenticated successfully with payload:", authData);
 
-
 		_.map(plugins, function(plugin, key) {
 			console.log("Starting fetcher " + key);
 			plugin.startFetcher(firebaseURL);
 		});
-
-
 
 	}
 });
