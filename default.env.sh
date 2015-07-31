@@ -1,4 +1,4 @@
-export FIREBASE_PASS=
-export FIREBASE_URL=
+export FIREBASE_URL=https://<yourinstance>.firebaseio.com
 export FIREBASE_USER=
+export FIREBASE_PASS=
 
