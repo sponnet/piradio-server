@@ -63,6 +63,8 @@ module.exports = {
 						thumb: track.image,
 						title: track.title,
 						unixtimestamp: track.time_gmt,
+						spotifyurl : track.spotify_url,
+						youtubeid : track.youtube_id
 					};
 					console.log('song to be saved : ', songdata);
 					playlistdata.postSong(songdata);
