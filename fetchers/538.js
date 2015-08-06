@@ -1,5 +1,5 @@
 var util = require('util');
-var playlistdata = require('../services/playlistdata');
+var playlistdata = require('../lib/services/playlistdata');
 var request = require("request")
 var firebaseURL;
 var _ = require('lodash');

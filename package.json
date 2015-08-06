@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "env NODE_ENV='test' mocha --recursive --timeout 15000 -u tdd --reporter list lib/**/test/*test.js",
     "start": "node index.js",
     "devel": ". ./env.sh && node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.4.0",
     "express": "^4.13.1",
     "firebase": "^2.2.7",
     "firebase-client": "^0.1.0",
@@ -29,5 +30,9 @@
   },
   "engines": {
     "node": "0.12.2"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
   }
 }

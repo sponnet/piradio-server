@@ -1,5 +1,5 @@
 var socket = require('socket.io-client');
-var playlistdata = require('../services/playlistdata');
+var playlistdata = require('../lib/services/playlistdata');
 var _ = require('lodash');
 
 var firebaseURL;
