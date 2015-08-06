@@ -35,6 +35,10 @@ Then start it up with:
 
 ``foreman run npm start``
 
+## Running the tests
+``foreman run npm test``
+
+
 ## Deploy to your heroku instance
 
 ``git push heroku master``
