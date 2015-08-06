@@ -36,7 +36,7 @@ module.exports = {
 						}
 
 
-						console.log("Channel to be saved=", postdata);
+						console.log("538 channel to be saved=", postdata);
 
 						if (item.tracks && item.tracks[0]) {
 							accum.push(item);
@@ -66,7 +66,7 @@ module.exports = {
 						spotifyurl : track.spotify_url,
 						youtubeid : track.youtube_id
 					};
-					console.log('song to be saved : ', songdata);
+					console.log('538 song to be saved : ', songdata);
 					playlistdata.postSong(songdata);
 				});
 
