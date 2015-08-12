@@ -6,6 +6,9 @@ var _ = require('lodash');
 
 var includedChannels = ['538'];
 
+var lastfetched = null;
+var lastmessage = "";
+
 module.exports = {
 
 	startFetcher: function startFetcher(firebaseURL) {
@@ -20,7 +23,14 @@ module.exports = {
 
 
 			downloadJSON(function(err, data) {
-				console.log("Downlaoded", data);
+				if (err) {
+					this.lastmessage = "Error: " + err;
+				} else {
+					this.lastmessage = data;
+					this.lastfetched = new Date();
+				}
+
+				console.log("Downloaded", data);
 				var channelsWithTracks = _.reduce(data, function(accum, item) {
 
 					//console.log("item=", item.label);
@@ -63,8 +73,8 @@ module.exports = {
 						thumb: track.image,
 						title: track.title,
 						unixtimestamp: track.time_gmt,
-						spotifyurl : track.spotify_url,
-						youtubeid : track.youtube_id
+						spotifyurl: track.spotify_url,
+						youtubeid: track.youtube_id
 					};
 					console.log('538 song to be saved : ', songdata);
 					playlistdata.postSong(songdata);
@@ -89,7 +99,6 @@ module.exports = {
 					cb(error, body);
 				} else {
 					cb(error);
-
 				}
 			})
 
@@ -110,7 +119,8 @@ module.exports = {
 	status: function status() {
 		return ({
 			name: "538",
-			lastfetched: null
+			lastfetched: lastfetched,
+			lastmessage: lastmessage
 		});
 	}
 

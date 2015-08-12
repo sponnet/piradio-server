@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "env NODE_ENV='test' mocha --recursive --timeout 15000 -u tdd --reporter list lib/**/test/*test.js",
+    "debug": "env NODE_ENV='test' mocha --debug-brk --recursive --timeout 15000 -u tdd --reporter list lib/**/test/*test.js",
     "start": "node index.js",
     "devel": ". ./env.sh && node index.js"
   },
