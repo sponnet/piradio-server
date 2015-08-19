@@ -6,11 +6,7 @@ var _ = require('lodash');
 
 var includedChannels = ['538'];
 
-var lastfetched = null;
-var lastmessage = "";
-
 module.exports = {
-
 	startFetcher: function startFetcher(firebaseURL) {
 		this.firebaseURL = firebaseURL;
 
@@ -18,67 +14,59 @@ module.exports = {
 			firebaseURL: this.firebaseURL
 		});
 
-
 		function fetchData() {
-
-
 			downloadJSON(function(err, data) {
 				if (err) {
-					this.lastmessage = "Error: " + err;
+					console.log(err);
 				} else {
-					this.lastmessage = data;
-					this.lastfetched = new Date();
+					console.debug("Downloaded ok ", data);
+					var channelsWithTracks = _.reduce(data, function(accum, item) {
+
+						if (_.includes(includedChannels, item.label)) {
+
+							var postdata = {
+								id: '538_' + item.label,
+								description: item.title,
+								name: item.title,
+								website: 'http://',
+								icon: ''
+							}
+
+
+							console.log("538 channel to be saved=", postdata);
+
+							if (item.tracks && item.tracks[0]) {
+								accum.push(item);
+							}
+
+							playlistdata.postChannel(postdata);
+						}
+
+
+						return accum;
+
+					}, []);
+
+
+					_.each(channelsWithTracks, function(item) {
+						//console.log("Save this song", item);
+
+						var track = item.tracks[0];
+
+						var songdata = {
+							channelid: '538_' + item.label,
+							artist: track.artist,
+							image: track.image,
+							thumb: track.image,
+							title: track.title,
+							unixtimestamp: track.time_gmt,
+							spotifyurl: track.spotify_url,
+							youtubeid: track.youtube_id
+						};
+						console.log('538 song to be saved : ', songdata);
+						playlistdata.postSong(songdata);
+					});
 				}
-
-				console.log("Downloaded", data);
-				var channelsWithTracks = _.reduce(data, function(accum, item) {
-
-					//console.log("item=", item.label);
-
-					if (_.includes(includedChannels, item.label)) {
-
-						var postdata = {
-							id: '538_' + item.label,
-							description: item.title,
-							name: item.title,
-							website: 'http://',
-							icon: ''
-						}
-
-
-						console.log("538 channel to be saved=", postdata);
-
-						if (item.tracks && item.tracks[0]) {
-							accum.push(item);
-						}
-
-						playlistdata.postChannel(postdata);
-					}
-
-
-					return accum;
-
-				}, []);
-
-
-				_.each(channelsWithTracks, function(item) {
-					//console.log("Save this song", item);
-
-					var track = item.tracks[0];
-
-					var songdata = {
-						channelid: '538_' + item.label,
-						artist: track.artist,
-						image: track.image,
-						thumb: track.image,
-						title: track.title,
-						unixtimestamp: track.time_gmt,
-						spotifyurl: track.spotify_url,
-						youtubeid: track.youtube_id
-					};
-					console.log('538 song to be saved : ', songdata);
-					playlistdata.postSong(songdata);
-				});
 
 			});
 		}
@@ -101,9 +89,6 @@ module.exports = {
 					cb(error);
 				}
 			})
-
-
-
 		}
 
 
@@ -118,9 +103,7 @@ module.exports = {
 
 	status: function status() {
 		return ({
-			name: "538",
-			lastfetched: lastfetched,
-			lastmessage: lastmessage
+			name: "538"
 		});
 	}
 
