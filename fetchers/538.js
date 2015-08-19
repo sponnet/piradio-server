@@ -19,7 +19,7 @@ module.exports = {
 				if (err) {
 					console.log(err);
 				} else {
-					console.debug("Downloaded ok ", data);
+					console.log("Downloaded ok ", data);
 					var channelsWithTracks = _.reduce(data, function(accum, item) {
 
 						if (_.includes(includedChannels, item.label)) {
