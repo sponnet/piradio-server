@@ -13,7 +13,11 @@ module.exports = {
 
 		playlistdata.init({
 			firebaseURL: this.firebaseURL
-		});
+		},start);
+
+		function start(){
+			
+		}
 
 
 		function connectSocket() {

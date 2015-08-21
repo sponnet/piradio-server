@@ -13,6 +13,7 @@ var plugins = {
 	plugins_538: require('./fetchers/538'),
 	plugins_nostalgie: require('./fetchers/nostalgie'),
 	plugins_qmusic: require('./fetchers/q-music'),
+	plugins_hitfm: require('./fetchers/hitfm'),
 };
 
 
