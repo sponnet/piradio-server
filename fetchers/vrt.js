@@ -18,7 +18,8 @@ module.exports = {
 		// this is a list of ignored channels
 		// it contains all the regional RADIO2 channels
 		// and a news only channel ( no music there )
-		var filteredchannels = ["21", "22", "23", "24", "13"];
+		// and klara (31)
+		var filteredchannels = ["21", "22", "23", "24", "13", "31"];
 
 		client = socket.connect('http://radioplusnode.vrt.be');
 
