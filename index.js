@@ -14,6 +14,7 @@ var plugins = {
 	plugins_nostalgie: require('./fetchers/nostalgie'),
 	plugins_qmusic: require('./fetchers/q-music'),
 	plugins_hitfm: require('./fetchers/hitfm'),
+	plugins_clubfm: require('./fetchers/clubfm'),
 };
 
 
