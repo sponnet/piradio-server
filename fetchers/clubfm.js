@@ -100,7 +100,7 @@ function extract(body) {
 
 		if (result.artist.indexOf("NIEUWS") > -1) {
 			console.log('clubFM - nieuws');
-			return ();
+			return;
 		}
 
 		return (result);
