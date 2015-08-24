@@ -97,6 +97,12 @@ function extract(body) {
 		if (result.title) {
 			result.title = result.title.trim();
 		}
+
+		if (result.artist.indexOf("NIEUWS") > -1) {
+			console.log('clubFM - nieuws');
+			return ();
+		}
+
 		return (result);
 	} catch (e) {
 		console.error(e);
