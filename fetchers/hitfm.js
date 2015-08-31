@@ -61,11 +61,11 @@ function fetchData() {
 				title: result.title,
 				unixtimestamp: Math.floor(new Date().getTime() / 1000),
 			};
-			console.log('song data : ', songdata);
+			//console.log('song data : ', songdata);
 
 			playlistdata.postSong(songdata);
 		} else {
-			console.log('HitFM : nothing to save');
+			console.error('HitFM : nothing to save');
 		}
 
 	});
@@ -99,7 +99,7 @@ function extract(body) {
 				result.artist = elem[0].prev.data;
 				result.title = elem[0].next.data;
 			} else {
-				console.log('problem parsing artist and title from this:', body);
+				console.error('problem parsing artist and title from this:', body);
 				return;
 			}
 		}

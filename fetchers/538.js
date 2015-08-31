@@ -63,7 +63,7 @@ module.exports = {
 							spotifyurl: track.spotify_url,
 							youtubeid: track.youtube_id
 						};
-						console.log('538 song to be saved : ', songdata);
+						//console.log('538 song to be saved : ', songdata);
 						playlistdata.postSong(songdata);
 					});
 				}
@@ -72,7 +72,7 @@ module.exports = {
 		}
 
 		function downloadJSON(cb) {
-			console.log("Download JSON");
+			//console.log("Download JSON");
 			var url = "http://www.538.nl/ajax/VdaStationBundle/Station/jsonChannelData";
 			request({
 				url: url,
@@ -82,7 +82,7 @@ module.exports = {
 					'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 				}
 			}, function(error, response, body) {
-				console.log('got HTTP response');
+				//console.log('got HTTP response');
 				if (!error && response.statusCode === 200) {
 					cb(error, body);
 				} else {

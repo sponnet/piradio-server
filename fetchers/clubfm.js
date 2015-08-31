@@ -61,11 +61,10 @@ function fetchData() {
 				title: result.title,
 				unixtimestamp: Math.floor(new Date().getTime() / 1000),
 			};
-			console.log('song data : ', songdata);
 
 			playlistdata.postSong(songdata);
 		} else {
-			console.log('ClubFM : nothing to save');
+			console.error('ClubFM : nothing to save');
 		}
 
 	});
@@ -99,7 +98,7 @@ function extract(body) {
 		}
 
 		if (result.artist.indexOf("NIEUWS") > -1) {
-			console.log('clubFM - nieuws');
+			//console.log('clubFM - nieuws');
 			return;
 		}
 
@@ -109,16 +108,3 @@ function extract(body) {
 		return;
 	}
 }
-
-/*
-<p><img src="http://is3.mzstatic.com/image/pf/us/r30/Music1/v4/01/30/ce/0130ce9e-2432-acda-9f1b-bc008b1a87d1/8714221078725.100x100-75.jpg" width="70" alt="Ian Thomas - Till The Morning (ft Flo Rida And Lilana" title="Ian Thomas - Till The Morning (ft Flo Rida And Lilana" />Ian Thomas <br /> Till The Morning (ft Flo Rida And Lilana<br />
-<span class="social"><a href="" target="_blank">iTunes</a> | <a class="social-share" href="javascript:void(0)" rel="https://www.facebook.com/dialog/share?app_id=407886209257490&display=popup&href=&redirect_uri=http://www.hitfm.be">Facebook</a> | <a class="social-share" href="javascript:void(0)" rel="https://twitter.com/share?url=&text=Ik hoorde zonet dit leuk nummer op www.hitfm.be&via=HITFM_be">Twitter</a></span></p>
-*/
-
-/*
-<p>Live <br /> They Stood Up For Love</p>
-*/
-
-/*
-<p>Nieuws</p>
-*/

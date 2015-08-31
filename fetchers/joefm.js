@@ -42,9 +42,9 @@ module.exports = {
 			sock.onmessage = function(e) {
 				var d = JSON.parse(e.data);
 				d = JSON.parse(d.data);
-				console.log('--------');
-				console.log('message', d);
-				console.log('action=', d.action);
+				//console.log('--------');
+				//console.log('message', d);
+				//console.log('action=', d.action);
 
 				// if action==play then its an update of the playlist
 				if (d.action == 'play') {
@@ -59,11 +59,11 @@ module.exports = {
 						videoid: d.data.youtube_id || null,
 						spotifyurl: d.data.spotify_url || null
 					};
-					console.log('song data : ', songdata);
+					//console.log('song data : ', songdata);
 
 					playlistdata.postSong(songdata);
 				}
-				console.log('--------');
+				//console.log('--------');
 
 			};
 

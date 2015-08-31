@@ -40,7 +40,7 @@ module.exports = {
 						timestamp: unixtimestamp.toISOString(),
 						unixtimestamp: unixtimestamp.unix(),
 					};
-					console.log('song to be saved : ', songdata);
+
 					playlistdata.postSong(songdata);
 
 					unixtimestamp = moment().hour(parseInt(data.tijd1.split('u')[0])).minutes(parseInt(data.tijd1.split('u')[1]));
@@ -51,7 +51,7 @@ module.exports = {
 						timestamp: unixtimestamp.toISOString(),
 						unixtimestamp: unixtimestamp.unix(),
 					};
-					console.log('song to be saved : ', songdata);
+
 					playlistdata.postSong(songdata);
 
 					unixtimestamp = moment().hour(parseInt(data.tijd2.split('u')[0])).minutes(parseInt(data.tijd2.split('u')[1]));
@@ -62,10 +62,10 @@ module.exports = {
 						timestamp: unixtimestamp.toISOString(),
 						unixtimestamp: unixtimestamp.unix(),
 					};
-					console.log('song to be saved : ', songdata);
+
 					playlistdata.postSong(songdata);
 				} catch (e) {
-					console.log("Error: ", e);
+					console.error(e);
 				}
 			});
 		}
