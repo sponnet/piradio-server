@@ -88,19 +88,9 @@ module.exports = {
 				thumb: songdata.thumb,
 				title: songdata.title,
 				unixtimestamp: Math.floor(new Date(Date.parse(songdata.timestamp)).getTime() / 1000),
-
-				//spotifyurl: d.data.spotify_url || null
 			};
 
-			var search = songdata.artist + " " + songdata.title;
-			console.log(channelid, ' - ', search);
-			getYouTubeURL(search, function(err, result) {
-				if (!err && result && result.items && result.items[0] && result.items[0].id) {
-					songdata_cleaned.videoid = result.items[0].id.videoId || null;
-				}
-				//console.log('song to save', songdata_cleaned);
-				playlistdata.postSong(songdata_cleaned);
-			});
+			playlistdata.postSong(songdata_cleaned);
 		}
 	},
 
