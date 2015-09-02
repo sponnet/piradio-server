@@ -28,7 +28,7 @@ module.exports = {
 
 
 			downloadJSON(function(err, data) {
-				console.log("Got data:", data);
+				//console.log("Got data:", data);
 
 				try {
 
@@ -74,7 +74,7 @@ module.exports = {
 		function downloadJSON(cb) {
 			var when = moment().subtract(5, 'minutes');
 
-			console.log("Download JSON");
+			//console.log("Download JSON");
 			var url = "http://www.nostalgie.eu/playlist/search/?d=" + when.year() + "-" + when.month() + "-" + when.date() + "&h=" + when.hour() + "&m=" + when.minute();
 			request({
 				url: url,
@@ -84,8 +84,9 @@ module.exports = {
 					'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
 				}
 			}, function(error, response, body) {
-				console.log('got HTTP response');
+				//console.log('got HTTP response');
 				if (!error && response.statusCode === 200) {
+					console.error(error);
 					cb(error, body);
 				} else {
 					cb(error);
