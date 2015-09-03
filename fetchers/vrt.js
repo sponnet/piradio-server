@@ -41,17 +41,21 @@ module.exports = {
 					//console.log("Channel " + item.channel.info.name + " is filtered.");
 				} else {
 
+					try {
 
-					var postdata = {
-						id: item.channel.id,
-						description: item.channel.info.description || null,
-						name: item.channel.info.name,
-						website: item.channel.info.website || null,
-						//icon: 'http://static1.q-music.vmmacdn.be//0/88/a5/88/877484/joe_logo.png'
-					};
-					//console.log('channel to post', postdata);
-					playlistdata.postChannel(postdata);
-
+						var postdata = {
+							id: item.channel.id,
+							description: item.channel.info.description || null,
+							name: item.channel.info.name,
+							website: item.channel.info.website || null,
+							//icon: 'http://static1.q-music.vmmacdn.be//0/88/a5/88/877484/joe_logo.png'
+						};
+						//console.log('channel to post', postdata);
+						playlistdata.postChannel(postdata);
+					} catch (e) {
+						console.error(e);
+						console.error("Error yielded by item ", item);
+					}
 				}
 			});
 		});
